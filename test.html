@@ -1,0 +1,60 @@
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jasmine/2.3.3/jasmine.min.css">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jasmine/2.3.3/jasmine.min.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jasmine/2.3.3/jasmine-html.min.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jasmine/2.3.3/boot.min.js"></script>
+		<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-mocks.js"></script>
+    <script src="angular-carousel.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.9/angular-touch.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular-route.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular-sanitize.js"></script>
+    <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.5.0.js"></script>
+
+		<script src="app.js"></script>
+	</head>
+	<body>
+	</body>
+<script type="text/javascript">
+
+describe('giphyAPIcall', function () {
+    var giphyAPIcall, httpBackend;
+    beforeEach(function () {
+        module('DemoApp');
+
+        inject(function ($httpBackend, _giphyAPIcall_) {
+            giphyAPIcall = _giphyAPIcall_;
+            httpBackend = $httpBackend;
+        });
+    });
+
+    it('Checking giphy API call', function () {
+ 
+        var returnData = {};
+
+        var testQuery = "enter keyword to test here";
+
+ 
+        httpBackend.expectGET("http://api.giphy.com/v1/gifs/search?q="+testQuery+"&api_key=nW5kH08e33troZ0wcdS4ywSLg9KyoIMb&limit=3").respond(returnData);
+ 
+        var returnedPromise = giphyAPIcall.get(testQuery);
+ 
+        var result;
+        returnedPromise.then(function (response) {
+            result = response.data;
+        });
+ 
+        httpBackend.flush();
+         
+        expect(result).toEqual(returnData);
+ 
+    });
+ 
+ 
+});
+
+
+
+</script>
+</html>

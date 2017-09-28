@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html ng-app="DemoApp">
+<head>
+    <link href='angular-carousel.min.css' rel='stylesheet' type='text/css'>
+    <link href='style.css' rel='stylesheet' type='text/css'>
+</head>
+<body ng-controller="DemoCtrl">
+
+    <h1>Search Giphy Carousel</h1>
+    <input type="text" ng-model="query" ng-change="inputChanged()">
+    <h1>{{query}}</h1>
+    <p>Search and 3 gifs will appear in carousel, depending on connection please wait a few moments for gifs to load.</p>
+
+    <div class="carousel-demo">
+        <ul rn-carousel rn-carousel-transition="hexagon">
+            <li ng-repeat="x in gifs">
+                <div ng-style="{'background-image': 'url(' + x.images['fixed_height_downsampled'].url + ')'}"  class="bgimage"></div>
+            </li>
+        </ul>
+    </div>
+
+
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.9/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.9/angular-touch.min.js"></script>
+
+<script src="angular-carousel.min.js"></script>
+
+<script src="app.js"></script>
+
+
+
+</html>
